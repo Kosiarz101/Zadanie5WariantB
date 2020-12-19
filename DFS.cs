@@ -28,9 +28,22 @@ namespace WariantBZad5KamilŁozowski
             if (graph[s-1]!=null)
             {
                 while (graph[s-1].Count != 0)
-                {                   
-                    nextEdge = graph[s - 1].Last.Value;
-                    graph[s - 1].RemoveLast();
+                {
+                    //Znajdowanie następnego skrzyżowania i usuwanie go z listy incydencji
+                    int max = int.MinValue;
+                    foreach(Vertex v in graph[s-1])
+                    {
+                        if(v.Waga-v.Odleglosc>max)
+                        {
+                            max = v.Waga - v.Odleglosc;
+                            nextEdgeNumer = k;
+                        }
+                        k++;                       
+                    }
+                    nextEdge = graph[s - 1].ElementAt(nextEdgeNumer);
+                    k = 0;
+                    graph[s - 1].Remove(graph[s - 1].ElementAt(nextEdgeNumer));
+                    
                     nextEdgeNumer = nextEdge.Numer;
                     foreach(Vertex w in graph[nextEdgeNumer-1])
                     {
@@ -41,7 +54,6 @@ namespace WariantBZad5KamilŁozowski
                         k++;
                     }
                     graph[nextEdgeNumer-1].Remove(graph[nextEdgeNumer - 1].ElementAt(k));
-
                     Find(graph, nextEdgeNumer, edges, result);
                 }
                 result.Push(s);
