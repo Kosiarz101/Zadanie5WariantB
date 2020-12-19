@@ -1,0 +1,7 @@
+F:\Users\Kosiarz\Documents\Projekty\C#\SEMESTR 3\Semestr3\WariantBZad5KamilŁozowski\bin\Debug\WariantBZad5KamilŁozowski.exe.config
+F:\Users\Kosiarz\Documents\Projekty\C#\SEMESTR 3\Semestr3\WariantBZad5KamilŁozowski\bin\Debug\WariantBZad5KamilŁozowski.exe
+F:\Users\Kosiarz\Documents\Projekty\C#\SEMESTR 3\Semestr3\WariantBZad5KamilŁozowski\bin\Debug\WariantBZad5KamilŁozowski.pdb
+F:\Users\Kosiarz\Documents\Projekty\C#\SEMESTR 3\Semestr3\WariantBZad5KamilŁozowski\obj\Debug\WariantBZad5KamilŁozowski.csprojAssemblyReference.cache
+F:\Users\Kosiarz\Documents\Projekty\C#\SEMESTR 3\Semestr3\WariantBZad5KamilŁozowski\obj\Debug\WariantBZad5KamilŁozowski.csproj.CoreCompileInputs.cache
+F:\Users\Kosiarz\Documents\Projekty\C#\SEMESTR 3\Semestr3\WariantBZad5KamilŁozowski\obj\Debug\WariantBZad5KamilŁozowski.exe
+F:\Users\Kosiarz\Documents\Projekty\C#\SEMESTR 3\Semestr3\WariantBZad5KamilŁozowski\obj\Debug\WariantBZad5KamilŁozowski.pdb
