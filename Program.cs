@@ -38,6 +38,7 @@ namespace WariantBZad5KamilŁozowski
             LinkedList<Vertex>[] route = ReadFromFile(sciezka);
             ReadAllStreets(route);
             ReadAnswer(DFS.Find(route, 1));
+            Console.WriteLine("\n" + DFS.attractiveness);
         }
         static void ReadAllStreets(LinkedList<Vertex>[] route)
         {
@@ -58,6 +59,10 @@ namespace WariantBZad5KamilŁozowski
         }
         static void ReadAnswer(Stack<int> result)
         {
+            if (DFS.attractiveness >= 0)
+                Console.WriteLine("TAK");
+            else
+                Console.WriteLine("NIE");
             while(result.Count!=0)
             {
                 Console.WriteLine(result.Pop());
