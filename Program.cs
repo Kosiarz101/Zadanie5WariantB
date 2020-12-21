@@ -46,8 +46,8 @@ namespace WariantBZad5KamilŁozowski
             string sciezka = "Wyc_in_9_Łozowski.txt";
             LinkedList<Vertex>[] route = ReadFromFile(sciezka);
             ReadAllStreets(route);
-            ReadAnswer(DFS.Find(route, DFS.bestCrossroad));
-            Console.WriteLine("\n" + DFS.attractiveness);
+            Stack<int> result = DFS.Find(route, DFS.bestCrossroad);
+            SaveToFile(result);
         }
         static void ReadAllStreets(LinkedList<Vertex>[] route)
         {
@@ -65,17 +65,20 @@ namespace WariantBZad5KamilŁozowski
                     Console.WriteLine($"Dlugość: {road.Odleglosc} km");
                 }
             }
-        }
-        static void ReadAnswer(Stack<int> result)
+        }       
+        static void SaveToFile(Stack<int> result)
         {
+            string sciezka = "Wyc_out_9_Łozowski.txt";
+            StreamWriter sw = new StreamWriter(sciezka);
             if (DFS.attractiveness >= 0)
-                Console.WriteLine("TAK");
+                sw.WriteLine("TAK");
             else
-                Console.WriteLine("NIE");
-            while(result.Count!=0)
+                sw.WriteLine("NIE");
+            while (result.Count != 0)
             {
-                Console.WriteLine(result.Pop());
+                sw.WriteLine(result.Pop());
             }
+            sw.Close();
         }
     }
 }
