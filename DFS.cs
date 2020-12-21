@@ -9,6 +9,7 @@ namespace WariantBZad5KamilŁozowski
     static class DFS
     {
         public static int attractiveness { get; set; }
+        public static int bestCrossroad { get; set; }
         public static Stack<int> Find(LinkedList<Vertex>[] graph, int s)
         {
             int[] edges = new int[graph.Length];

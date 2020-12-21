@@ -11,18 +11,27 @@ namespace WariantBZad5KamilŁozowski
     {
         private static LinkedList<Vertex>[] ReadFromFile(string sciezka)
         {
+            int max = int.MinValue;
             string[] data = File.ReadAllLines(sciezka);
             LinkedList<Vertex>[] tab = new LinkedList<Vertex>[int.Parse(data[0])];            
             for(int i=1; i<data.Length; i++)
             {
+                //Wpisywanie wierzchołka do listy incydencji
                 string[] entries = data[i].Split(' ');
                 if(tab[int.Parse(entries[0]) - 1] == null)
                 {
                     tab[int.Parse(entries[0]) - 1] = new LinkedList<Vertex>();
-                }
+                }                
                 Vertex vertex = new Vertex(int.Parse(entries[1]), int.Parse(entries[2]), int.Parse(entries[3]));
+
+                //Znajdywanie najlepszego skrzyżowania z którego wystartuje trasa wycieczki
+                if(vertex.Waga - vertex.Odleglosc>max)
+                {
+                    DFS.bestCrossroad = int.Parse(entries[0]) - 1;
+                }
                 tab[int.Parse(entries[0]) - 1].AddLast(vertex);
 
+                //Wpisywanie wierzchołka do listy incydencji
                 if (tab[int.Parse(entries[1]) - 1] == null)
                 {
                     tab[int.Parse(entries[1]) - 1] = new LinkedList<Vertex>();
@@ -34,10 +43,10 @@ namespace WariantBZad5KamilŁozowski
         }
         static void Main(string[] args)
         {
-            string sciezka = "Wyc_in_9_Łozowski — kopia.txt";
+            string sciezka = "Wyc_in_9_Łozowski.txt";
             LinkedList<Vertex>[] route = ReadFromFile(sciezka);
             ReadAllStreets(route);
-            ReadAnswer(DFS.Find(route, 1));
+            ReadAnswer(DFS.Find(route, DFS.bestCrossroad));
             Console.WriteLine("\n" + DFS.attractiveness);
         }
         static void ReadAllStreets(LinkedList<Vertex>[] route)
