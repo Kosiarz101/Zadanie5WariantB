@@ -8,14 +8,16 @@ namespace WariantBZad5KamilŁozowski
 {
     class Vertex
     {
-        public int Numer { get; set; }
+        public int NumerSkrzyzowania { get; set; }
         public int Waga { get; set; }
         public int Odleglosc { get; set; }
-        public Vertex(int numer, int odleglosc, int waga)
+        public int NumerUlicy { get; set; }
+        public Vertex(int numerSkrzyzowania, int odleglosc, int waga, int numerUlicy)
         {
-            this.Numer = numer;
+            this.NumerSkrzyzowania = numerSkrzyzowania;
             this.Waga = waga;
             this.Odleglosc = odleglosc;
+            this.NumerUlicy = numerUlicy;
         }
     }
 }

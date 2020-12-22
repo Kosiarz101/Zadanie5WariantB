@@ -10,6 +10,7 @@ namespace WariantBZad5KamilŁozowski
     {
         public static int attractiveness { get; set; }
         public static int bestCrossroad { get; set; }
+        public static int firstStreetNumber { get; set; }
         public static Stack<int> Find(LinkedList<Vertex>[] graph, int s)
         {
             int[] edges = new int[graph.Length];
@@ -20,10 +21,10 @@ namespace WariantBZad5KamilŁozowski
             }
             //int[,] matrice = CreateMatrice(graph);  
             attractiveness = 0;
-            Find(graph, s, edges, result);
+            Find(graph, s, firstStreetNumber, edges, result);
             return result;
         }
-        private static void Find(LinkedList<Vertex>[] graph, int s, int[] edges, Stack<int> result)
+        private static void Find(LinkedList<Vertex>[] graph, int s, int streetNr, int[] edges, Stack<int> result)
         {
             int nextEdgeNumer = 0;
             Vertex nextEdge = null;
@@ -40,6 +41,7 @@ namespace WariantBZad5KamilŁozowski
                         {
                             max = v.Waga - v.Odleglosc;
                             nextEdgeNumer = k;
+                            streetNr = v.NumerUlicy;
                         }
                         k++;                       
                     }
@@ -48,10 +50,10 @@ namespace WariantBZad5KamilŁozowski
                     attractiveness += nextEdge.Waga - nextEdge.Odleglosc;   //Uwzględnienie atrakcyjności atrakcji do sumy atrakcyjności przejażdżki
                     graph[s - 1].Remove(graph[s - 1].ElementAt(nextEdgeNumer));    //Usunięcie z listy incydencji
                     //Usunięcie kopii tej ulicy z listy incydencji
-                    nextEdgeNumer = nextEdge.Numer;     
+                    nextEdgeNumer = nextEdge.NumerSkrzyzowania;     
                     foreach(Vertex w in graph[nextEdgeNumer-1])
                     {
-                        if(w.Numer==s && w.Odleglosc==nextEdge.Odleglosc && w.Waga==nextEdge.Waga)
+                        if(w.NumerSkrzyzowania==s && w.Odleglosc==nextEdge.Odleglosc && w.Waga==nextEdge.Waga)
                         {
                             break;
                         }
@@ -59,10 +61,10 @@ namespace WariantBZad5KamilŁozowski
                     }
                     graph[nextEdgeNumer-1].Remove(graph[nextEdgeNumer - 1].ElementAt(k));
                     //Wywołanie rekurencyjne
-                    Find(graph, nextEdgeNumer, edges, result);
+                    Find(graph, nextEdgeNumer, streetNr, edges, result);                   
                 }
-                //Dodanie ulicy do wyniku
-                result.Push(s);
+                //Dodanie ulicy do wyniku 
+                result.Push(streetNr);
             }        
         }
         private static int[,] CreateMatrice(LinkedList<Vertex>[] graph)
@@ -72,7 +74,7 @@ namespace WariantBZad5KamilŁozowski
             {
                 foreach (Vertex w in graph[i])
                 {
-                    matrice[i, w.Numer-1] = 1;
+                    matrice[i, w.NumerSkrzyzowania-1] = 1;
                 }
             }
             return matrice;

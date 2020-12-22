@@ -22,12 +22,13 @@ namespace WariantBZad5KamilŁozowski
                 {
                     tab[int.Parse(entries[0]) - 1] = new LinkedList<Vertex>();
                 }                
-                Vertex vertex = new Vertex(int.Parse(entries[1]), int.Parse(entries[2]), int.Parse(entries[3]));
+                Vertex vertex = new Vertex(int.Parse(entries[1]), int.Parse(entries[2]), int.Parse(entries[3]), i);
 
                 //Znajdywanie najlepszego skrzyżowania z którego wystartuje trasa wycieczki
                 if(vertex.Waga - vertex.Odleglosc>max)
                 {
                     DFS.bestCrossroad = int.Parse(entries[0]) - 1;
+                    DFS.firstStreetNumber = i;
                 }
                 tab[int.Parse(entries[0]) - 1].AddLast(vertex);
 
@@ -36,7 +37,7 @@ namespace WariantBZad5KamilŁozowski
                 {
                     tab[int.Parse(entries[1]) - 1] = new LinkedList<Vertex>();
                 }
-                Vertex vertex2 = new Vertex(int.Parse(entries[0]), int.Parse(entries[2]), int.Parse(entries[3]));
+                Vertex vertex2 = new Vertex(int.Parse(entries[0]), int.Parse(entries[2]), int.Parse(entries[3]), i);
                 tab[int.Parse(entries[1]) - 1].AddLast(vertex2);
             }           
             return tab;
@@ -60,10 +61,11 @@ namespace WariantBZad5KamilŁozowski
                 foreach(Vertex road in route[i])
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"Następne skrzyżowanie: {road.Numer}");
+                    Console.WriteLine($"Następne skrzyżowanie: {road.NumerSkrzyzowania}");
                     Console.ResetColor();
                     Console.WriteLine($"Poziom Atrakcyjności: {road.Waga}");
                     Console.WriteLine($"Dlugość: {road.Odleglosc} km");
+                    Console.WriteLine($"Numer Ulicy: {road.NumerUlicy}");
                 }
             }
         }       
@@ -75,7 +77,7 @@ namespace WariantBZad5KamilŁozowski
                 sw.WriteLine("TAK");
             else
                 sw.WriteLine("NIE");
-            while (result.Count != 0)
+            while (result.Count != 1)
             {
                 sw.WriteLine(result.Pop());
             }
