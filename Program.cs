@@ -50,7 +50,8 @@ namespace WariantBZad5KamilŁozowski
             SaveToFile(result);
         }
         static void ReadAllStreets(LinkedList<Vertex>[] route)
-        {   
+        {            
+            //slave
             for(int i=0; i<route.Length; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
