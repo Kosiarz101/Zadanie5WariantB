@@ -8,9 +8,10 @@ namespace WariantBZad5KamilŁozowski
 {
     static class DFS
     {
-        public static int attractiveness { get; set; }
-        public static int bestCrossroad { get; set; }
-        public static int firstStreetNumber { get; set; }
+        public static int Attractiveness { get; set; }
+        public static int BestCrossroad { get; set; }
+        public static int FirstStreetNumber { get; set; }
+        public static int SecondCrossroad { get; set; }
         public static Stack<int> Find(LinkedList<Vertex>[] graph, int s)
         {
             int[] edges = new int[graph.Length];
@@ -20,8 +21,8 @@ namespace WariantBZad5KamilŁozowski
                 edges[i] = 4;
             }
             //int[,] matrice = CreateMatrice(graph);  
-            attractiveness = 0;
-            Find(graph, s, firstStreetNumber, edges, result);
+            Attractiveness = 0;
+            Find(graph, s, FirstStreetNumber, edges, result);
             return result;
         }
         private static void Find(LinkedList<Vertex>[] graph, int s, int streetNr, int[] edges, Stack<int> result)
@@ -47,7 +48,7 @@ namespace WariantBZad5KamilŁozowski
                     }
                     nextEdge = graph[s - 1].ElementAt(nextEdgeNumer); 
                     k = 0;
-                    attractiveness += nextEdge.Waga - nextEdge.Odleglosc;   //Uwzględnienie atrakcyjności atrakcji do sumy atrakcyjności przejażdżki
+                    Attractiveness += nextEdge.Waga - nextEdge.Odleglosc;   //Uwzględnienie atrakcyjności atrakcji do sumy atrakcyjności przejażdżki
                     graph[s - 1].Remove(graph[s - 1].ElementAt(nextEdgeNumer));    //Usunięcie z listy incydencji
                     //Usunięcie kopii tej ulicy z listy incydencji
                     nextEdgeNumer = nextEdge.NumerSkrzyzowania;     

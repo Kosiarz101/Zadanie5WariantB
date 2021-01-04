@@ -27,8 +27,10 @@ namespace WariantBZad5KamilŁozowski
                 //Znajdywanie najlepszego skrzyżowania z którego wystartuje trasa wycieczki
                 if(vertex.Waga - vertex.Odleglosc>max)
                 {
-                    DFS.bestCrossroad = int.Parse(entries[0]) - 1;
-                    DFS.firstStreetNumber = i;
+                    DFS.BestCrossroad = int.Parse(entries[0]);
+                    DFS.FirstStreetNumber = i;
+                    DFS.SecondCrossroad = int.Parse(entries[1]);
+                    max = vertex.Waga - vertex.Odleglosc;
                 }
                 tab[int.Parse(entries[0]) - 1].AddLast(vertex);
 
@@ -47,7 +49,7 @@ namespace WariantBZad5KamilŁozowski
             string sciezka = "Wyc_in_9_Łozowski — kopia.txt";
             LinkedList<Vertex>[] route = ReadFromFile(sciezka);
             ReadAllStreets(route);
-            Stack<int> result = DFS.Find(route, DFS.bestCrossroad);
+            Stack<int> result = DFS.Find(route, DFS.BestCrossroad);
             SaveToFile(result);
         }
         static void ReadAllStreets(LinkedList<Vertex>[] route)
@@ -72,15 +74,27 @@ namespace WariantBZad5KamilŁozowski
         static void SaveToFile(Stack<int> result)
         {
             string sciezka = "Wyc_out_9_Łozowski.txt";
+            bool secondCrossroad = false;
             StreamWriter sw = new StreamWriter(sciezka);
-            if (DFS.attractiveness >= 0)
+            if (DFS.Attractiveness >= 0)
+            {
                 sw.WriteLine("TAK");
+                sw.WriteLine((result.Count-1).ToString());
+                while (result.Count != 1)
+                {
+                    
+                    if (secondCrossroad == false)
+                    {
+                        sw.Write(result.Pop());
+                        sw.WriteLine(" " + DFS.SecondCrossroad);
+                        secondCrossroad = true;
+                    }
+                    else
+                        sw.WriteLine(result.Pop());
+                }
+            }              
             else
                 sw.WriteLine("NIE");
-            while (result.Count != 1)
-            {
-                sw.WriteLine(result.Pop());
-            }
             sw.Close();
         }
     }
