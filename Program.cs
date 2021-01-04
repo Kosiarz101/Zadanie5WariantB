@@ -44,7 +44,7 @@ namespace WariantBZad5KamilŁozowski
         }
         static void Main(string[] args)
         {
-            string sciezka = "Wyc_in_9_Łozowski.txt";
+            string sciezka = "Wyc_in_9_Łozowski — kopia.txt";
             LinkedList<Vertex>[] route = ReadFromFile(sciezka);
             ReadAllStreets(route);
             Stack<int> result = DFS.Find(route, DFS.bestCrossroad);
